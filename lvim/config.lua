@@ -18,13 +18,22 @@ local jdtls_opts = {
 }
 require("lvim.lsp.manager").setup("jdtls", jdtls_opts)
 
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+  {
+    command = "prettier",
+    filetypes = { "typescript", "vue" },
+  },
+}
+
+lvim.format_on_save.enabled = true
 
 -- Plugins
 lvim.plugins = {
   { 'akinsho/toggleterm.nvim', version = "*", config = true }
 }
 
-require("toggleterm").setup{
+require("toggleterm").setup {
   open_mapping = '<C-g>',
   direction = 'horizontal',
   shade_terminals = true,
