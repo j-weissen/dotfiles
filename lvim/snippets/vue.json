@@ -1,0 +1,8 @@
+{
+  "Component Scaffold": {
+    "prefix": "comp",
+    "body": [
+      "<script setup lang=\"ts\">\n\n</script>\n\n<template>\n\n</template>"
+    ]
+  }
+}

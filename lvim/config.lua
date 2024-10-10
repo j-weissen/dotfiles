@@ -1,10 +1,12 @@
 -- General
 local path_to_mason = "/home/jweissen/.local/share/lvim/mason/"
 
+-- LSP
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "jdtls" })
+
 -- Java
 local path_to_jdtls = path_to_mason .. "packages/jdtls/"
 -- Fix lombok notation processing problem
-vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "jdtls" })
 
 local jdtls_opts = {
   cmd = {
@@ -17,6 +19,23 @@ local jdtls_opts = {
   }
 }
 require("lvim.lsp.manager").setup("jdtls", jdtls_opts)
+
+-- TypeScript
+local tsserver_opts = {
+  init_options = {
+    plugins = {
+      {
+        name = '@vue/typescript-plugin',
+        location = '/home/jweissen/Software/npm-deps/node_modules/@vue/typescript-plugin/',
+        languages = { 'javascript', 'typescript', 'vue' },
+      },
+    },
+  },
+  filetypes = {
+    "typescript", "javascript", "vue"
+  }
+}
+require("lvim.lsp.manager").setup("tsserver", tsserver_opts)
 
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
