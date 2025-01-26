@@ -26,7 +26,7 @@ set $menu wofi --show drun -I
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 # output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 # output * bg /home/jweissen/OneDrivePersonal/images/wallpapers/solar-system.jpg fill
-output * bg socialclub.jpg fill
+output * bg zappa.jpg fill
 #
 # Example configuration:
 #
@@ -75,6 +75,8 @@ input * xkb_layout "de"
 
     # Start your launcher
     bindsym $mod+d exec $menu
+
+    bindsym $mod+i exec gnome-control-center
 
     # lock
     bindsym $mod+Alt+l exec swaylock -f
