@@ -1,0 +1,133 @@
+/*base background color*/
+@define-color bg_main #075BE3;
+@define-color bg_main_tooltip rgba(0, 0, 0, 0.7);
+
+
+/*base background color of selections */
+@define-color bg_hover rgba(200, 200, 200, 0.3);
+/*base background color of active elements */
+@define-color bg_active rgba(100, 100, 100, 0.5);
+
+/*base border color*/
+@define-color border_main rgba(255, 255, 255, 0.2);
+
+/*text color for entries, views and content in general */
+@define-color content_main white;
+@define-color content_inactive rgba(255, 255, 255, 0.25);
+
+* {
+  text-shadow: none;
+  box-shadow: none;
+  border: none;
+  border-radius: 0;
+  font-family: "Iosevka Nerd Font";
+  font-weight: 600;
+  font-size: 12.7px;
+  color: @content_main;
+}
+
+window#waybar {
+  background-color: #085EE5;
+  box-shadow: inset 0px 2px 5px #333333;
+}
+
+tooltip {
+  background: @bg_main_tooltip;
+  border-radius: 5px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: @border_main;
+}
+
+tooltip label {
+  color: @content_main;
+}
+
+#custom-os_button {
+  font-size: 24px;
+  padding-left: 12px;
+  padding-right: 20px;
+
+  border-top-right-radius: 10% 50%;
+  border-bottom-right-radius: 10% 50%;
+  background-color: #019000;
+  box-shadow: inset 0px 2px 5px #333333;
+}
+
+#custom-os_button:hover {
+  background: #488c48;
+}
+
+#taskbar {}
+
+#taskbar button {
+  background-color: red;
+  min-width: 130px;
+  border-bottom: 3px solid rgba(255, 255, 255, 0.3);
+  margin-left: 2px;
+  margin-right: 2px;
+  padding-left: 8px;
+  padding-right: 8px;
+  color: white;
+  transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+#taskbar button.active {
+  border-bottom: 3px solid white;
+  background: @bg_active;
+}
+
+#taskbar button:hover {
+  border-bottom: 3px solid white;
+  background: @bg_hover;
+  color: @content_main;
+}
+
+#window {
+  border-radius: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+#pulseaudio {
+  padding-left: 10px;
+  padding-right: 10px;
+  transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+
+#network {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+#network:hover {
+  background: @bg_hover;
+}
+
+#battery {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+#battery:hover {
+  background: @bg_hover;
+}
+
+#clock {
+  padding-right: 5px;
+  padding-left: 5px;
+  transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+#clock:hover {
+  background: @bg_hover;
+}
+
+.modules-right {
+  background-color: #008EEF;
+  box-shadow: inset 0px 2px 5px #333333;
+  border-left: solid 1px #333366;
+}
+
+#pulseaudio:hover {
+  background: @bg_hover;
+}

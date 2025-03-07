@@ -1,0 +1,8 @@
+* {
+  font-family: "Iosevka Nerd Font";
+  background-color: #CFE5FC;
+}
+
+#entry::after {
+  background-color: #FFFFFF;
+}
