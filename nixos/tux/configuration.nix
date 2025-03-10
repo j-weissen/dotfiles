@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { inputs, config, pkgs, ... }:
 
 {
@@ -9,7 +5,6 @@
     ./hardware-configuration.nix
   ];
 
-  programs.hyprland.enable = true;
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -40,6 +35,8 @@
     LC_TIME = "de_AT.UTF-8";
   };
 
+  programs.hyprland.enable = true;
+
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "at";
@@ -65,41 +62,52 @@
   };
 
   environment.systemPackages = with pkgs; [
-    gnumake
+    # Tools
     vim
-    wget
-    fastfetch
     gcc
+    gnumake
+    wget
     man
-    alacritty
-    dmenu
+    fastfetch
+    stow
     lunarvim
     git
     gh
-    brave
     tmux
     tldr
     imagemagick
     feh
-    wofi
+    python3
+    upower
+
+    # Applications
+    alacritty
+    brave
     nautilus
-    hyprpaper
+    keepass
+    wdisplays
+    nextcloud-client
+    onedriver
+
+    # Desktop
+    wofi
+    waybar
     wl-clipboard
-    hyprpicker
+    hyprpaper
     hyprlock
     hyprcursor
-    waybar
-    
-    stow
-    wdisplays
+    hyprpicker
     xwayland
-    upower
-    clang-tools
+    # dmenu
+
+    # Development
     gdb
-    flutter326
+    clang-tools
+    tailwindcss-language-server
   ];
 
   fonts.packages = with pkgs; [
+    # (nerdfonts.override { fonts = [ "Iosevka" "Hack" ]; })
     nerd-fonts.iosevka
     nerd-fonts.hack
   ];
@@ -114,12 +122,12 @@
 
   # List services that you want to enable:
 
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-	services.xserver = {
+	# services.xserver = {
 		# enable = true;
 		# windowManager.i3.enable = true;
-	};
+	# };
+
+  # services.openssh.enable = true;
   services.upower.enable = true;
 
   # Open ports in the firewall.
