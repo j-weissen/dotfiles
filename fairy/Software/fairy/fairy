@@ -1,3 +1,5 @@
+#! /bin/sh
+
 fairy_marker="# Fairy"
 fairy_dotfiles_repo_path="$HOME/dotfiles"
 fairy_nixos_config_flake_path="$fairy_dotfiles_repo_path/nixos"
@@ -8,12 +10,12 @@ fairy_install() {
     sed -i "/$fairy_marker/a\
     $package" $fairy_nixos_config_file_path
   done
-  nixos-rebuild switch --flake $fairy_nixos_config_flake_path#$HOSTNAME
+  sudo nixos-rebuild switch --flake $fairy_nixos_config_flake_path#$HOSTNAME
   if [ $? != 0 ]; then
     echo "ERROR: nixos-rebuild failed"
     exit 1
   fi
-  cd $fairy_dotfiles_repo_path && git commit -m "fairy: installed $1"
+  cd $fairy_dotfiles_repo_path && git stage $fairy_nixos_config_file_path && git commit -m "fairy: installed $@"
 }
 
 case "$1" in
@@ -25,6 +27,12 @@ case "$1" in
         echo "trying to push"
         cd $fairy_dotfiles_repo_path && git push
         ;;
+    commit)
+        cd $fairy_dotfiles_repo_path && git commit -m "$2"
+        ;;
+    edit)
+      $EDITOR $0
+      ;;
     *)
         echo "Unknown command: $1"
         exit 1

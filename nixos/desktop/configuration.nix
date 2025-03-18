@@ -131,6 +131,7 @@
     tailwindcss-language-server
 
     # Fairy
+whatsapp-for-linux
   ];
 
   fonts.packages = with pkgs; [
