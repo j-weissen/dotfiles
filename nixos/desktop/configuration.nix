@@ -131,6 +131,7 @@
     tailwindcss-language-server
 
     # Fairy
+prismlauncher
 steam
 bat
 whatsapp-for-linux
