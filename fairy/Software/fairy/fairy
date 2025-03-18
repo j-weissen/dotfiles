@@ -28,10 +28,14 @@ case "$1" in
         cd $fairy_dotfiles_repo_path && git push
         ;;
     commit)
+        cd $fairy_dotfiles_repo_path && git add .
         cd $fairy_dotfiles_repo_path && git commit -m "$2"
         ;;
     edit)
       $EDITOR $0
+      ;;
+    config)
+      $EDITOR $fairy_nixos_config_file_path
       ;;
     *)
         echo "Unknown command: $1"
