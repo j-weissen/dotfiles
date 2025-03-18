@@ -18,12 +18,12 @@ vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "jdtls" })
 --
 
 -- Tailwind
-local tailwindcss_opts = {
-  cmd = {
-    "tailwindcss-language-server"
-  }
-}
-require("lvim.lsp.manager").setup("tailwindcss", tailwindcss_opts)
+-- local tailwindcss_opts = {
+--   cmd = {
+--     "tailwindcss-language-server"
+--   }
+-- }
+-- require("lvim.lsp.manager").setup("tailwindcss", tailwindcss_opts)
 
 -- TypeScript
 -- local tsserver_opts = {
@@ -63,6 +63,7 @@ lvim.plugins = {
       'stevearc/dressing.nvim',   -- optional for vim.ui.select
     },
     config = true,
+    autostart = true,
   }
 }
 
