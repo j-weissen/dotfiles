@@ -131,6 +131,7 @@
     tailwindcss-language-server
 
     # Fairy
+steam
 bat
 whatsapp-for-linux
   ];
