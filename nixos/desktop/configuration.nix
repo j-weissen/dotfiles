@@ -131,6 +131,7 @@
     tailwindcss-language-server
 
     # Fairy
+zoom-us
 prismlauncher
 steam
 bat
