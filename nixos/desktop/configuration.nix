@@ -131,6 +131,7 @@
     tailwindcss-language-server
 
     # Fairy
+thunderbird
 zoom-us
 prismlauncher
 steam
