@@ -131,6 +131,7 @@
     tailwindcss-language-server
 
     # Fairy
+keepassxc
 thunderbird
 zoom-us
 prismlauncher
