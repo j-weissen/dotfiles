@@ -115,6 +115,7 @@
     tldr
     feh
     python3
+    bat
 
     # Applications
     alacritty
@@ -124,6 +125,13 @@
     onedriver
     discord
     spotify
+    obsidian
+    keepassxc
+    thunderbird
+    zoom-us
+    prismlauncher
+    steam
+    whatsapp-for-linux
 
     # Development
     gdb
@@ -131,14 +139,7 @@
     tailwindcss-language-server
 
     # Fairy
-obsidian
-keepassxc
-thunderbird
-zoom-us
-prismlauncher
-steam
-bat
-whatsapp-for-linux
+usbutils
   ];
 
   fonts.packages = with pkgs; [
