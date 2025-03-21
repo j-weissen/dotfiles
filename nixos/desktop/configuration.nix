@@ -131,6 +131,7 @@
     tailwindcss-language-server
 
     # Fairy
+obsidian
 keepassxc
 thunderbird
 zoom-us
