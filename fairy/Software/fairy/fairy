@@ -5,16 +5,20 @@ fairy_dotfiles_repo_path="$HOME/dotfiles"
 fairy_nixos_config_flake_path="$fairy_dotfiles_repo_path/nixos"
 fairy_nixos_config_file_path="$fairy_nixos_config_flake_path/$HOSTNAME/configuration.nix"
 
-fairy_install() {
-  for package in ${@}; do
-    sed -i "/$fairy_marker/a\
-    $package" $fairy_nixos_config_file_path
-  done
+fairy_rebuild() {
   sudo nixos-rebuild switch --flake $fairy_nixos_config_flake_path#$HOSTNAME
   if [ $? != 0 ]; then
     echo "ERROR: nixos-rebuild failed"
     exit 1
   fi
+}
+
+fairy_install() {
+  for package in ${@}; do
+    sed -i "/$fairy_marker/a\
+    $package" $fairy_nixos_config_file_path
+  done
+  fairy_rebuild
   cd $fairy_dotfiles_repo_path && git stage $fairy_nixos_config_file_path && git commit -m "fairy: installed $@"
 }
 
@@ -22,6 +26,10 @@ case "$1" in
     install)
         echo "trying to install ${@:2}"
         fairy_install ${@:2}
+        ;;
+    rebuild)
+        echo "trying to rebuild"
+        fairy_rebuild
         ;;
     push)
         echo "trying to push"
