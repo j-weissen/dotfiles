@@ -112,6 +112,7 @@
     git
     gh
     tmux
+    tmuxinator
     tldr
     feh
     python3
@@ -139,6 +140,7 @@
     tailwindcss-language-server
 
     # Fairy
+code-cursor
 usbutils
   ];
 
