@@ -25,6 +25,14 @@ vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "jdtls" })
 -- }
 -- require("lvim.lsp.manager").setup("tailwindcss", tailwindcss_opts)
 
+-- Tailwind
+local astro_opts = {
+  cmd = {
+    "astro-language-server"
+  }
+}
+require("lvim.lsp.manager").setup("astro-language-server", astro_opts)
+
 -- TypeScript
 -- local tsserver_opts = {
 --   init_options = {
@@ -60,10 +68,17 @@ lvim.plugins = {
     lazy = false,
     dependencies = {
       'nvim-lua/plenary.nvim',
-      'stevearc/dressing.nvim',   -- optional for vim.ui.select
+      'stevearc/dressing.nvim',
     },
     config = true,
     autostart = true,
+  },
+  {
+    "pmizio/typescript-tools.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig", },
+    opts = {
+      cmd = {"typescript-language-server", "--stdio"}
+    },
   }
 }
 
