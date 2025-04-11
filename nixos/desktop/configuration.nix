@@ -137,6 +137,7 @@
     tailwindcss-language-server
 
     # Fairy
+dart
 btop
     zsh
     code-cursor
