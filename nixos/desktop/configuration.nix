@@ -137,6 +137,7 @@
     tailwindcss-language-server
 
     # Fairy
+unzip
 zip
 newman
 postman
