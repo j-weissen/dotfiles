@@ -137,6 +137,10 @@
     tailwindcss-language-server
 
     # Fairy
+zip
+newman
+postman
+vimPlugins.dart-vim-plugin
 dart
 btop
     zsh
