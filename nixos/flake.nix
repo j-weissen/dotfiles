@@ -16,8 +16,14 @@
         specialArgs = { inherit system inputs; };
         modules = [ ./tux/configuration.nix ];
       };
-      desktop = nixpkgs-24-11.lib.nixosSystem {
-        specialArgs = { inherit system inputs; };
+      desktop = nixpkgs-unstable.lib.nixosSystem {
+        specialArgs = { 
+          inherit system inputs; 
+          unstablePkgs = import nixpkgs-unstable {
+            inherit system;
+            config.allowUnfree = true;
+          };
+        };
         modules = [ ./desktop/configuration.nix ];
       };
     };
