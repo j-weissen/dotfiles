@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, unstablePkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   nixpkgs.config.allowUnfree = true;
@@ -134,6 +134,7 @@
     tailwindcss-language-server
 
     # Fairy
+urlencode
 unzip
 zip
 newman
@@ -147,9 +148,9 @@ btop
   ];
 
   fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "Iosevka" "Hack" ]; })
-    # nerd-fonts.iosevka
-    # nerd-fonts.hack
+    # (nerdfonts.override { fonts = [ "Iosevka" "Hack" ]; })
+    nerd-fonts.iosevka
+    nerd-fonts.hack
   ];
 
   programs.zsh = {
