@@ -134,6 +134,7 @@
     tailwindcss-language-server
 
     # Fairy
+gimp
 urlencode
 unzip
 zip
