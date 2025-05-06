@@ -81,12 +81,14 @@
     #media-session.enable = true;
   };
 
+  services.onedrive.enable = true;
+  services.udev.packages = with pkgs; [ android-udev-rules ];
 
   users.defaultUserShell = pkgs.zsh;
   users.users.jonas = {
     isNormalUser = true;
     description = "Jonas Weissengruber";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "adbusers" ];
     shell = pkgs.zsh;
     packages = with pkgs; [
     #  thunderbird
@@ -117,7 +119,6 @@
     brave
     keepass
     nextcloud-client
-    onedriver
     discord
     spotify
     obsidian
@@ -134,6 +135,7 @@
     tailwindcss-language-server
 
     # Fairy
+libusb1
 gimp
 urlencode
 unzip
@@ -163,6 +165,7 @@ btop
       enable = true;
     };
   };
+  programs.adb.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
