@@ -135,6 +135,7 @@
     tailwindcss-language-server
 
     # Fairy
+pdf4qt
 file
 libusb1
 gimp
