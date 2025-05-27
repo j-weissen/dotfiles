@@ -135,6 +135,7 @@
     tailwindcss-language-server
 
     # Fairy
+libreoffice-still
 pdf4qt
 file
 libusb1
