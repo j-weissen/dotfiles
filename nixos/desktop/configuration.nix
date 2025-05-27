@@ -135,6 +135,7 @@
     tailwindcss-language-server
 
     # Fairy
+file
 libusb1
 gimp
 urlencode
