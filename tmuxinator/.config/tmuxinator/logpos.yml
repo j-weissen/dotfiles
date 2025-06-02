@@ -1,0 +1,7 @@
+name: logpos
+root: <%= ENV["HOME"] %>/Programming/logpos
+
+windows:
+  - dev:
+      panes:
+        - nix develop && lvim
