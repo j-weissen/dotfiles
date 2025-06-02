@@ -1,4 +1,4 @@
-{ config, lib, pkgs, unstablePkgs, modulesPath, ... }:
+{ config, lib, pkgs, modulesPath, ... }:
 {
   hardware.graphics = {
     enable = true;
@@ -33,6 +33,6 @@
     nvidiaSettings = true;
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = unstablePkgs.linuxPackages.nvidiaPackages.stable;
+    package = pkgs.linuxPackages.nvidiaPackages.stable;
   };
 }

@@ -5,7 +5,10 @@
 { config, pkgs, ... }:
 
 {
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    android_sdk.accept_license = true;
+  };
 
   imports =
     [ # Include the results of the hardware scan.
@@ -135,6 +138,7 @@
     tailwindcss-language-server
 
     # Fairy
+android-studio-full
 libreoffice-still
 pdf4qt
 file
@@ -169,6 +173,7 @@ btop
     };
   };
   programs.adb.enable = true;
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

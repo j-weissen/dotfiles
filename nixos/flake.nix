@@ -19,10 +19,6 @@
       desktop = nixpkgs-unstable.lib.nixosSystem {
         specialArgs = { 
           inherit system inputs; 
-          unstablePkgs = import nixpkgs-unstable {
-            inherit system;
-            config.allowUnfree = true;
-          };
         };
         modules = [ ./desktop/configuration.nix ];
       };
