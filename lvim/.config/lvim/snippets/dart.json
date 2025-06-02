@@ -1,0 +1,23 @@
+{
+  "stateful_widget": {
+    "prefix": "statefulwidget",
+    "body": [
+      "import 'package:flutter/material.dart';",
+      "",
+      "class ${1:MyStatefulWidget} extends StatefulWidget {",
+      "  @override",
+      "  _${1:MyStatefulWidget}State createState() => _${1:MyStatefulWidget}State();",
+      "}",
+      "",
+      "class _${1:MyStatefulWidget}State extends State<${1:MyStatefulWidget}> {",
+      "  @override",
+      "  Widget build(BuildContext context) {",
+      "    return Container(",
+      "      child: Text('${2:Hello, World!}'),",
+      "    );",
+      "  }",
+      "}"
+    ],
+    "description": "A snippet for creating a StatefulWidget in Flutter"
+  }
+}

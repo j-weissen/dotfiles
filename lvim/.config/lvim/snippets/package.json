@@ -9,6 +9,10 @@
       {
         "language": "vue",
         "path": "./vue.json"
+      },
+      {
+        "language": "dart",
+        "path": "./dart.json"
       }
     ]
   }

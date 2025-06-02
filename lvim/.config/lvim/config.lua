@@ -34,29 +34,29 @@ local astro_opts = {
 require("lvim.lsp.manager").setup("astro-language-server", astro_opts)
 
 -- TypeScript
--- local tsserver_opts = {
---   init_options = {
---     plugins = {
---       {
---         name = '@vue/typescript-plugin',
---         location = '/home/jweissen/Software/npm-deps/node_modules/@vue/typescript-plugin/',
---         languages = { 'javascript', 'typescript', 'vue' },
---       },
---     },
---   },
---   filetypes = {
---     "typescript", "javascript", "vue"
---   }
--- }
--- require("lvim.lsp.manager").setup("tsserver", tsserver_opts)
+local tsserver_opts = {
+  init_options = {
+    plugins = {
+      {
+        name = '@vue/typescript-plugin',
+        location = '/home/jweissen/Software/npm-deps/node_modules/@vue/typescript-plugin/',
+        languages = { 'javascript', 'typescript', 'vue' },
+      },
+    },
+  },
+  filetypes = {
+    "typescript", "javascript", "vue"
+  }
+}
+require("lvim.lsp.manager").setup("tsserver", tsserver_opts)
 
--- local formatters = require "lvim.lsp.null-ls.formatters"
--- formatters.setup {
---   {
---     command = "prettier",
---     filetypes = { "typescript", "vue" },
---   },
--- }
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+  {
+    command = "prettier",
+    filetypes = { "typescript", "vue" },
+  },
+}
 
 lvim.format_on_save.enabled = true
 
