@@ -1,5 +1,20 @@
+local path_to_mason = "$HOME/.local/share/lvim/mason/"
+
 -- LSP
-vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "jdtls" })
+-- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "jdtls" })
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "clangd" })
+
+-- Clangd
+local clangd_opts = {
+  cmd = {
+    "clangd"
+  },
+  filetypes = {"c", "cpp"},
+  root_markers = {
+    ".clangd", ".git"
+  }
+}
+require("lvim.lsp.manager").setup("clangd", clangd_opts)
 
 -- Java
 -- Fix lombok notation processing problem
@@ -25,30 +40,30 @@ vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "jdtls" })
 -- }
 -- require("lvim.lsp.manager").setup("tailwindcss", tailwindcss_opts)
 
--- Tailwind
-local astro_opts = {
-  cmd = {
-    "astro-language-server"
-  }
-}
-require("lvim.lsp.manager").setup("astro-language-server", astro_opts)
+-- Astro
+-- local astro_opts = {
+--   cmd = {
+--     "astro-language-server"
+--   }
+-- }
+-- require("lvim.lsp.manager").setup("astro-language-server", astro_opts)
 
 -- TypeScript
-local tsserver_opts = {
-  init_options = {
-    plugins = {
-      {
-        name = '@vue/typescript-plugin',
-        location = '/home/jweissen/Software/npm-deps/node_modules/@vue/typescript-plugin/',
-        languages = { 'javascript', 'typescript', 'vue' },
-      },
-    },
-  },
-  filetypes = {
-    "typescript", "javascript", "vue"
-  }
-}
-require("lvim.lsp.manager").setup("tsserver", tsserver_opts)
+-- local tsserver_opts = {
+--   init_options = {
+--     plugins = {
+--       {
+--         name = '@vue/typescript-plugin',
+--         location = '/home/jweissen/Software/npm-deps/node_modules/@vue/typescript-plugin/',
+--         languages = { 'javascript', 'typescript', 'vue' },
+--       },
+--     },
+--   },
+--   filetypes = {
+--     "typescript", "javascript", "vue"
+--   }
+-- }
+-- require("lvim.lsp.manager").setup("tsserver", tsserver_opts)
 
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
@@ -63,23 +78,23 @@ lvim.format_on_save.enabled = true
 -- Plugins
 lvim.plugins = {
   { 'akinsho/toggleterm.nvim', version = "*", config = true },
-  {
-    'nvim-flutter/flutter-tools.nvim',
-    lazy = false,
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'stevearc/dressing.nvim',
-    },
-    config = true,
-    autostart = true,
-  },
-  {
-    "pmizio/typescript-tools.nvim",
-    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig", },
-    opts = {
-      cmd = {"typescript-language-server", "--stdio"}
-    },
-  }
+  -- {
+  --   'nvim-flutter/flutter-tools.nvim',
+  --   lazy = false,
+  --   dependencies = {
+  --     'nvim-lua/plenary.nvim',
+  --     'stevearc/dressing.nvim',
+  --   },
+  --   config = true,
+  --   autostart = true,
+  -- },
+  -- {
+  --   "pmizio/typescript-tools.nvim",
+  --   dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig", },
+  --   opts = {
+  --     cmd = {"typescript-language-server", "--stdio"}
+  --   },
+  -- }
 }
 
 require("toggleterm").setup {

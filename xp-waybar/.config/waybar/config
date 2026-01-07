@@ -6,7 +6,7 @@
     "gtk-layer-shell": true,
     "margin-bottom": -1,
     "passthrough": false,
-    "height": 41,
+    "height": 55,
     "modules-left": [
         "custom/os_button",
     ],
@@ -18,7 +18,7 @@
         "clock"
     ],
     "custom/os_button": {
-        "format": "  start",
+        "format": "   start",
         "on-click": "wofi --show drun",
         "tooltip": false
     },
