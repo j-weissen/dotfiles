@@ -19,7 +19,9 @@
   :config
   (pdf-tools-install)
   (add-to-list 'revert-without-query "\\.pdf\\'")
-  (add-hook 'pdf-view-mode-hook #'auto-revert-mode))
+  (add-hook 'pdf-view-mode-hook #'auto-revert-mode)
+  (with-eval-after-load 'pdf-view
+    (define-key pdf-view-mode-map (kbd "C-b") 'antn/tmux-keymap)))
 
 (use-package magit
   :bind ("C-c g" . magit-status))
