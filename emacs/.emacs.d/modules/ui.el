@@ -1,7 +1,7 @@
 ;;; modules/ui.el --- Theme, modeline, font, line numbers -*- lexical-binding: t -*-
 
 (use-package doom-themes
-  :init (load-theme 'doom-pine t))
+  :init (load-theme 'doom-flatwhite t))
 
 (use-package doom-modeline
   :hook (after-init . doom-modeline-mode)
