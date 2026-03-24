@@ -48,4 +48,8 @@
                (display-buffer-at-bottom)
                (window-height . 0.2)))
 
+(setq make-backup-files nil)
+(setq auto-save-default nil)
+(setq create-lockfiles nil)
+
 (put 'dired-find-alternate-file 'disabled nil)
