@@ -41,6 +41,7 @@
 (antn/load-module "modules/langs/dart")
 (antn/load-module "modules/langs/nasm")
 (antn/load-module "modules/langs/typst")
+(antn/load-module "modules/langs/c")
 
 ;;; MISC
 (add-to-list 'display-buffer-alist
