@@ -84,6 +84,10 @@
 (define-key antn/tmux-keymap (kbd "n") 'tab-bar-switch-to-next-tab)
 (define-key antn/tmux-keymap (kbd "p") 'tab-bar-switch-to-prev-tab)
 (define-key antn/tmux-keymap (kbd "o") 'other-window)
+(define-key antn/tmux-keymap (kbd "<left>")  'windmove-left)
+(define-key antn/tmux-keymap (kbd "<right>") 'windmove-right)
+(define-key antn/tmux-keymap (kbd "<up>")    'windmove-up)
+(define-key antn/tmux-keymap (kbd "<down>")  'windmove-down)
 (define-key antn/tmux-keymap (kbd "c") 'tab-new)
 (define-key antn/tmux-keymap (kbd "%") 'split-window-right)
 (define-key antn/tmux-keymap (kbd "\"") 'split-window-down)
@@ -188,6 +192,12 @@
   (set-frame-width (selected-frame) 3840 nil t)
   (set-frame-height (selected-frame) 2160 nil t))
 
+(defun antn/display-steyr ()
+  (interactive)
+  (shell-command "xrandr --output eDP-1 --off --output HDMI-1 --mode 1920x1080 --pos 0x0 --primary")
+  (set-frame-width (selected-frame) 1920 nil t)
+  (set-frame-height (selected-frame) 1080 nil t))
+
 (defun antn/display-internal ()
   (interactive)
   (shell-command "xrandr --output DP-1 --off --output eDP-1 --auto --primary")
@@ -198,5 +208,6 @@
 
 (define-key antn/monitor-keymap (kbd "i") 'antn/display-internal)
 (define-key antn/monitor-keymap (kbd "h") 'antn/display-hgb)
+(define-key antn/monitor-keymap (kbd "s") 'antn/display-steyr)
 
 (provide 'antn-keybindings)
