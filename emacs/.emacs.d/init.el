@@ -35,6 +35,7 @@
 (antn/load-module "modules/vterm")
 (antn/load-module "modules/tools")
 (antn/load-module "modules/exwm")
+(antn/load-module "modules/notifications")
 (antn/load-module "modules/session")
 (antn/load-module "modules/keybindings")
 ;(antn/load-module "modules/langs/python")
