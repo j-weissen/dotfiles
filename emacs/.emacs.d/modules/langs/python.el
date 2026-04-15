@@ -135,10 +135,11 @@
 (add-hook 'python-mode-hook    #'antn/python-setup)
 (add-hook 'python-ts-mode-hook #'antn/python-setup)
 
-(dolist (map (list python-mode-map python-ts-mode-map))
-  (define-key map (kbd "C-c C-c") #'antn/python-run)
-  (define-key map (kbd "C-c C-t") #'antn/python-test)
-  (define-key map (kbd "C-c C-k") #'antn/python-reset-commands)
-  (define-key map (kbd "C-c C-f") #'antn-python-black-buffer))
+(with-eval-after-load 'python
+  (dolist (map (list python-mode-map python-ts-mode-map))
+    (define-key map (kbd "C-c C-c") #'antn/python-run)
+    (define-key map (kbd "C-c C-t") #'antn/python-test)
+    (define-key map (kbd "C-c C-k") #'antn/python-reset-commands)
+    (define-key map (kbd "C-c C-f") #'antn-python-black-buffer)))
 
 (provide 'antn-python)

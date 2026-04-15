@@ -56,6 +56,39 @@
 (define-key antn/tmux-keymap (kbd "r") #'antn/reload-config)
 (define-key antn/tmux-keymap (kbd "q") #'antn/open-config)
 
+;;; Screenshots
+
+(defvar antn/ss-png-bytes nil)
+
+(push (cons 'image/png (lambda (_sel _type _val)
+                         (when antn/ss-png-bytes
+                           (cons 'image/png antn/ss-png-bytes))))
+      selection-converter-alist)
+
+(defun antn/ss-selection ()
+  (interactive)
+  (let ((tmpfile (expand-file-name (format-time-string "screenshot_%Y%m%d_%H%M%S.png")
+                                   temporary-file-directory)))
+    (set-process-sentinel
+     (start-process "maim-screenshot" nil "maim" "-s" tmpfile)
+     (lambda (proc event)
+       (let ((ok (= 0 (process-exit-status proc))))
+         (when ok
+           (with-temp-buffer
+             (set-buffer-multibyte nil)
+             (insert-file-contents-literally tmpfile)
+             (setq antn/ss-png-bytes (buffer-string)))
+           (x-own-selection-internal 'CLIPBOARD 'antn/png-selection))
+         (antn/notif-log "screenshot"
+                         (if ok "Screenshot captured" "Screenshot failed")
+                         (if ok (concat "Copied to clipboard.\n" tmpfile)
+                           (string-trim event))
+                         (if ok 1 2))
+         (cl-incf antn/notif-unread-count)
+         (force-mode-line-update t))))))
+
+(exwm-input-set-key (kbd "s-S") #'antn/ss-selection)
+   
 ;;; Launch programs
 
 (defun antn/keepass () (interactive) (start-process "keepassxc" nil "keepassxc"))
@@ -192,6 +225,12 @@
   (set-frame-width (selected-frame) 3840 nil t)
   (set-frame-height (selected-frame) 2160 nil t))
 
+(defun antn/display-sol ()
+  (interactive)
+  (shell-command "xrandr --output eDP-1 --off --output DP-1 --mode 2560x1440 --pos 0x0 --primary")
+  (set-frame-width (selected-frame) 2560 nil t)
+  (set-frame-height (selected-frame) 1440 nil t))
+
 (defun antn/display-steyr ()
   (interactive)
   (shell-command "xrandr --output eDP-1 --off --output HDMI-1 --mode 1920x1080 --pos 0x0 --primary")
@@ -209,5 +248,6 @@
 (define-key antn/monitor-keymap (kbd "i") 'antn/display-internal)
 (define-key antn/monitor-keymap (kbd "h") 'antn/display-hgb)
 (define-key antn/monitor-keymap (kbd "s") 'antn/display-steyr)
+(define-key antn/monitor-keymap (kbd "f") 'antn/display-sol)
 
 (provide 'antn-keybindings)
