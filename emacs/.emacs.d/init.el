@@ -38,6 +38,7 @@
 (antn/load-module "modules/notifications")
 (antn/load-module "modules/session")
 (antn/load-module "modules/keybindings")
+(antn/load-module "modules/screenshot")
 (antn/load-module "modules/langs/python")
 (antn/load-module "modules/langs/dart")
 (antn/load-module "modules/langs/nasm")
