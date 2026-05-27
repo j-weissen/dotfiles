@@ -56,39 +56,6 @@
 (define-key antn/tmux-keymap (kbd "r") #'antn/reload-config)
 (define-key antn/tmux-keymap (kbd "q") #'antn/open-config)
 
-;;; Screenshots
-
-(defvar antn/ss-png-bytes nil)
-
-(push (cons 'image/png (lambda (_sel _type _val)
-                         (when antn/ss-png-bytes
-                           (cons 'image/png antn/ss-png-bytes))))
-      selection-converter-alist)
-
-(defun antn/ss-selection ()
-  (interactive)
-  (let ((tmpfile (expand-file-name (format-time-string "screenshot_%Y%m%d_%H%M%S.png")
-                                   temporary-file-directory)))
-    (set-process-sentinel
-     (start-process "maim-screenshot" nil "maim" "-s" tmpfile)
-     (lambda (proc event)
-       (let ((ok (= 0 (process-exit-status proc))))
-         (when ok
-           (with-temp-buffer
-             (set-buffer-multibyte nil)
-             (insert-file-contents-literally tmpfile)
-             (setq antn/ss-png-bytes (buffer-string)))
-           (x-own-selection-internal 'CLIPBOARD 'antn/png-selection))
-         (antn/notif-log "screenshot"
-                         (if ok "Screenshot captured" "Screenshot failed")
-                         (if ok (concat "Copied to clipboard.\n" tmpfile)
-                           (string-trim event))
-                         (if ok 1 2))
-         (cl-incf antn/notif-unread-count)
-         (force-mode-line-update t))))))
-
-(exwm-input-set-key (kbd "s-S") #'antn/ss-selection)
-   
 ;;; Launch programs
 
 (defun antn/keepass () (interactive) (start-process "keepassxc" nil "keepassxc"))
@@ -106,11 +73,17 @@
                      (expand-file-name "~/Software/jupyter-venv/bin/jupyter-lab"))
       (message "Jupyter started"))))
 
+(defun antn/launch-claude ()
+  (interactive)
+  (agent-shell--new-shell :location default-directory
+                          :config (agent-shell-anthropic-make-claude-code-config)))
+
 (define-key antn/launch-keymap (kbd "t") #'vterm)
 (define-key antn/launch-keymap (kbd "k") #'antn/keepass)
 (define-key antn/launch-keymap (kbd "b") #'antn/browser)
 (define-key antn/launch-keymap (kbd "o") #'antn/office)
 (define-key antn/launch-keymap (kbd "j") #'antn/toggle-jupyter)
+(define-key antn/launch-keymap (kbd "c") #'antn/launch-claude)
 
 ;;; Buffer / window management
 
@@ -193,6 +166,42 @@
     (tab-bar-switch-to-tab "code")))
 
 (define-key antn/workspace-keymap (kbd "l") 'antn/workspace-logpos)
+
+(defun antn/workspace-osp ()
+  (interactive)
+  (let* ((dir       (expand-file-name "~/Seafile/FH/OSP2/"))
+         (asm-file  (concat dir "03_osp2_s2510239038/03_OSP2.asm"))
+         (osp-pdf   (concat dir "03_OSP2_Handout.pdf"))
+         (intel-pdf (concat dir "intel_manual.pdf")))
+
+    ;; Unload KVM modules so VirtualBox can use hardware virtualization
+    (shell-command "sudo modprobe -r kvm_intel 2>/dev/null; sudo modprobe -r kvm 2>/dev/null")
+
+    ;; Tab 1: code — .asm left, VirtualBox right
+    (tab-bar-rename-tab "code")
+    (delete-other-windows)
+    (find-file asm-file)
+    (split-window-right)
+    (other-window 1)
+    (start-process "virtualbox" nil "virtualbox")
+
+    ;; Delay tab 2 setup until VirtualBox has connected as EXWM window
+    (run-at-time 3 nil
+      (lambda ()
+        ;; Tab 2: docs — OSP pdf (pdf-tools) left, Intel manual (Brave) right
+        (tab-bar-new-tab)
+        (tab-bar-rename-tab "docs")
+        (delete-other-windows)
+        (split-window-right)
+        (find-file osp-pdf)
+        (other-window 1)
+        (start-process "brave-intel" nil "brave-browser" "--new-window"
+                       (concat "file://" intel-pdf))
+        (run-at-time 3 nil
+          (lambda ()
+            (tab-bar-switch-to-tab "code")))))))
+
+(define-key antn/workspace-keymap (kbd "o") 'antn/workspace-osp)
 
 (defun antn/workspace-typst ()
   "Open a typst editing workspace: left=editor, right=pdf preview."

@@ -5,6 +5,9 @@
   (unless (server-running-p)
     (server-start)))
 
+(use-package agent-shell
+    :ensure t)
+
 (use-package which-key
   :demand t
   :diminish which-key-mode
