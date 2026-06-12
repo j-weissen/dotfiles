@@ -6,7 +6,10 @@
     (server-start)))
 
 (use-package agent-shell
-    :ensure t)
+  :ensure t
+  :demand t
+  :config
+  (require 'agent-shell-anthropic))
 
 (use-package which-key
   :demand t
