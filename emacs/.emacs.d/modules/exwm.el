@@ -23,6 +23,7 @@
           ?\C-x))
   (setq exwm-input-global-keys
         `(([?\s-w] . exwm-workspace-switch)
+          ([?\s-r] . exwm-input-grab-keyboard)
           ,@(mapcar (lambda (i)
                       `(,(vector (+ ?\s-0 i)) .
                         (lambda ()
@@ -35,5 +36,19 @@
                   (lambda (command)
                     (interactive (list (read-shell-command "start program: ")))
                     (start-process-shell-command command nil command))))
+
+(add-hook 'exwm-input-line-mode-hook #'force-mode-line-update)
+(add-hook 'exwm-input-char-mode-hook #'force-mode-line-update)
+
+(with-eval-after-load 'doom-modeline
+  (doom-modeline-def-segment antn/exwm-input-mode
+    (when (derived-mode-p 'exwm-mode)
+      (if (eq exwm--input-mode 'char-mode)
+          (propertize " [C]" 'face 'doom-modeline-urgent)
+        " [L]")))
+
+  (doom-modeline-def-modeline 'main
+    '(eldoc bar window-state workspace-name window-number modals matches follow buffer-info remote-host buffer-position word-count parrot selection-info)
+    '(compilation objed-state misc-info antn/exwm-input-mode project-name persp-name battery grip irc mu4e gnus github debug repl lsp minor-modes input-method indent-info buffer-encoding major-mode process vcs check time)))
 
 (provide 'antn-exwm)
